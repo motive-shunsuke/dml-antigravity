@@ -76,7 +76,10 @@ export default function Home() {
       </section>
 
       {/* RECRUIT CTA */}
-      <section className={styles.section} style={{ background: 'linear-gradient(to right, #4e008e, #2e004f)' }}>
+      <section className={styles.section} style={{
+        background: 'linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url(/images/join-team-bg.jpg) center/cover',
+        backgroundAttachment: 'fixed'
+      }}>
         <div className="container" style={{ textAlign: 'center', padding: '4rem 1rem' }}>
           <h2 style={{ fontFamily: 'var(--font-oswald)', fontSize: '3rem', marginBottom: '1rem' }}>JOIN THE TEAM</h2>
           <p style={{ marginBottom: '2rem', fontSize: '1.2rem' }}>初心者から日本一へ。君の挑戦を待っている。</p>
