@@ -17,9 +17,9 @@ export const MemberCard = ({ member }: { member: Member }) => {
                 <span className={styles.position}>{member.position}</span>
             </div>
             <div className={styles.info}>
-                <span>GRADE: {member.grade}</span>
+                <span>学年: {member.grade}</span>
                 <span>{member.department}</span>
-                <span>High School: {member.highSchool}</span>
+                <span>出身高校: {member.highSchool}</span>
             </div>
             {member.message && (
                 <p className={styles.message}>"{member.message}"</p>

@@ -20,6 +20,25 @@ export const MemberGrid = ({ members }: { members: Member[] }) => {
     // Plan mentioned Position filter too on plan, let's add it.
     const [selectedPos, setSelectedPos] = useState<string>('ALL');
 
+    // Main categories requested by user
+    const categories = ['OF', 'MF', 'DF', 'G', 'MG', 'TR'];
+
+    // Mapping logic: Raw Position -> Category
+    const getCategory = (pos: string) => {
+        // Check for explicit matches first
+        if (pos.includes('AT') || pos.includes('OF')) return 'OF';
+        if (pos.includes('DF') || pos.includes('LDF')) return 'DF'; // LDF is Defense
+        if (pos.includes('G')) return 'G';
+        if (pos.includes('TR')) return 'TR';
+        if (pos.includes('MG') || pos.includes('AS')) return 'MG'; // AS -> MG
+
+        // Default/Remaining mappings
+        // SSDM -> MF (Short Stick Defensive Midfielder)
+        // FO -> MF (Face Off Midfielder)
+        // MF -> MF
+        return 'MF';
+    };
+
     const positions = useMemo(() => {
         const posSet = new Set(members.map(m => m.position));
         return Array.from(posSet).sort();
@@ -30,15 +49,11 @@ export const MemberGrid = ({ members }: { members: Member[] }) => {
     const filteredMembers = useMemo(() => {
         return members.filter(m => {
             const gradeMatch = selectedGrade === 'ALL' || m.grade === selectedGrade;
-            // Position filter: Contains search (e.g. "SSDM/FO" should match "FO" or specific)
-            // Let's do exact match first or "Includes"
-            const posMatch = selectedPos === 'ALL' || m.position.includes(selectedPos) || (selectedPos === 'STF' && ['MG', 'TR', 'AS'].includes(m.position));
-            // Simplified logic: Direct match if in list.
-            // Actually `positions` list has "SSDM/FO", "LDF", etc.
-            // Let's verify data content: "SSDM/FO", "LDF", "SSDM", "FO", "MF", "TR", "MG", "AS".
-            // If filter is "FO", "SSDM/FO" should theoretically show?
-            // For now, I'll use the exact strings found in data for the filter buttons, plus a manual "Staff" group maybe?
-            return gradeMatch && (selectedPos === 'ALL' || m.position === selectedPos);
+
+            const memberCat = getCategory(m.position);
+            const posMatch = selectedPos === 'ALL' || memberCat === selectedPos;
+
+            return gradeMatch && posMatch;
         });
     }, [members, selectedGrade, selectedPos]);
 
@@ -65,22 +80,24 @@ export const MemberGrid = ({ members }: { members: Member[] }) => {
                 </div>
 
                 <div className={styles.filterGroup}>
-                    <span className={styles.filterLabel}>POSITION:</span>
-                    <button
-                        className={`${styles.btnFilter} ${selectedPos === 'ALL' ? styles.active : ''}`}
-                        onClick={() => setSelectedPos('ALL')}
-                    >
-                        ALL
-                    </button>
-                    {positions.map(p => (
+                    <span className={styles.filterLabel}>POSITION</span>
+                    <div className={styles.filterButtons}>
                         <button
-                            key={p}
-                            className={`${styles.btnFilter} ${selectedPos === p ? styles.active : ''}`}
-                            onClick={() => setSelectedPos(p)}
+                            className={`${styles.filterButton} ${selectedPos === 'ALL' ? styles.active : ''}`}
+                            onClick={() => setSelectedPos('ALL')}
                         >
-                            {p}
+                            ALL
                         </button>
-                    ))}
+                        {categories.map(pos => (
+                            <button
+                                key={pos}
+                                className={`${styles.filterButton} ${selectedPos === pos ? styles.active : ''}`}
+                                onClick={() => setSelectedPos(pos)}
+                            >
+                                {pos}
+                            </button>
+                        ))}
+                    </div>
                 </div>
             </div>
 

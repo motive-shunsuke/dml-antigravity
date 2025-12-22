@@ -4,7 +4,7 @@
     "grade": 4,
     "department": "外国語学部フランス語学科",
     "highSchool": "我孫子高等学校",
-    "position": "主将",
+    "position": "SSDM",
     "message": "覇氣あるssdmに注目してください"
   },
   {
@@ -12,7 +12,7 @@
     "grade": 4,
     "department": "経済学部経済学科",
     "highSchool": "埼玉県立越谷南高等学校",
-    "position": "OFリーダー",
+    "position": "AT",
     "message": "でか！でか！でか！"
   },
   {
@@ -20,7 +20,7 @@
     "grade": 4,
     "department": "経済学部経済学科",
     "highSchool": "新潟江南高等学校",
-    "position": "DFリーダー",
+    "position": "DF",
     "message": "今年は大きくなります"
   },
   {
@@ -60,7 +60,7 @@
     "grade": 4,
     "department": "経済学部経営学科",
     "highSchool": "東京成徳大学高校",
-    "position": "MGリーダー",
+    "position": "MG",
     "message": "勝ちに貢献します！"
   },
   {
@@ -68,7 +68,7 @@
     "grade": 4,
     "department": "経済学部国際経済学科",
     "highSchool": "川口高校",
-    "position": "TRリーダー",
+    "position": "TR",
     "message": "ラスト1年全力尽くします"
   },
   {
@@ -84,7 +84,7 @@
     "grade": 3,
     "department": "経済学部経済学科",
     "highSchool": "昌平高校",
-    "position": "副主将",
+    "position": "MF",
     "message": "闘将系ラクロッサー"
   },
   {
