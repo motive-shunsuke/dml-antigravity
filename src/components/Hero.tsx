@@ -16,8 +16,8 @@ export const Hero = () => {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
                 >
-                    <span>BE THE SPARK</span>
-                    UNLEASH<br />YOUR<br />POTENTIAL
+                    <span>DOKKYO MEN'S LACROSSE</span>
+                    覇氣
                 </motion.h1>
             </div>
 
