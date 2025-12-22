@@ -8,14 +8,14 @@ export const Hero = () => {
     const [openingFinished, setOpeningFinished] = useState(false);
 
     useEffect(() => {
-        // Sequence timer
+        // Sequence timer - slowed down
         // 0s: Start
-        // 0.2s: Bolt hits bottom
-        // 0.3s: Logo appears
-        // 2.5s: Finish
+        // 0.3s: Bolt hits bottom
+        // 0.5s: Logo appears
+        // 3.5s: Finish
         const timer = setTimeout(() => {
             setOpeningFinished(true);
-        }, 2800);
+        }, 3800);
         return () => clearTimeout(timer);
     }, []);
 
@@ -32,25 +32,32 @@ export const Hero = () => {
                             className={styles.openingBolt}
                             initial={{ opacity: 0 }}
                             animate={{ opacity: [0, 1, 1, 0] }}
-                            transition={{ duration: 0.5, times: [0, 0.3, 0.4, 1] }}
+                            transition={{ duration: 0.8, times: [0, 0.3, 0.5, 1] }}
                         >
                             <svg viewBox="0 0 100 1000" preserveAspectRatio="none">
                                 <motion.path
                                     d="M50,0 L45,200 L55,200 L48,400 L58,400 L52,600 L60,600 L50,1000"
-                                    stroke="#fff"
-                                    strokeWidth="3"
+                                    stroke="url(#lightning-gradient)"
+                                    strokeWidth="4"
                                     fill="none"
                                     initial={{ pathLength: 0 }}
                                     animate={{ pathLength: 1 }}
-                                    transition={{ duration: 0.2, ease: "easeIn" }}
+                                    transition={{ duration: 0.3, ease: "easeIn" }}
                                 />
+                                <defs>
+                                    <linearGradient id="lightning-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                        <stop offset="0%" stopColor="#fff" />
+                                        <stop offset="50%" stopColor="#fbbf24" />
+                                        <stop offset="100%" stopColor="#fff" />
+                                    </linearGradient>
+                                </defs>
                             </svg>
                         </motion.div>
                         <motion.div
                             className={styles.openingLogo}
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 0.3, duration: 0.2, type: 'spring' }}
+                            transition={{ delay: 0.5, duration: 0.3, type: 'spring' }}
                         >
                             <img src="/images/blitz-logo.png" alt="DOKKYO BLITZ" style={{ maxWidth: '400px', width: '80vw' }} />
                         </motion.div>
