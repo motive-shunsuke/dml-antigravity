@@ -44,6 +44,44 @@ export default function Home() {
         </div>
       </section>
 
+      {/* IMPACT DATA */}
+      <section className={styles.impactSection}>
+        <div className="container">
+          <h2 className={styles.sectionTitle} style={{ marginBottom: '1rem' }}>TEAM <span>IMPACT</span></h2>
+          <p style={{ color: '#aaa' }}>数字で見る獨協ラクロス</p>
+          <div className={styles.impactGrid}>
+            <div className={styles.statItem}>
+              <div className={styles.statNumber}>160<span style={{ fontSize: '2rem' }}>km/h</span></div>
+              <span className={styles.statLabel}>MAX SHOT SPEED</span>
+            </div>
+            <div className={styles.statItem}>
+              <div className={styles.statNumber}>80<span style={{ fontSize: '2rem' }}>+</span></div>
+              <span className={styles.statLabel}>MEMBERS</span>
+            </div>
+            <div className={styles.statItem}>
+              <div className={styles.statNumber}>33<span style={{ fontSize: '2rem' }}>th</span></div>
+              <span className={styles.statLabel}>SINCE 1992</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* MOOD / SHORT MOVIES */}
+      <section className={styles.moodSection}>
+        <div className="container">
+          <h2 className={styles.sectionTitle}>TEAM <span>MOOD</span></h2>
+          <div className={styles.videoGrid}>
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} className={styles.videoCard}>
+                <div className={styles.videoPlaceholder}>
+                  MOVIE {i}<br />(COMING SOON)
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* OFFICIAL SNS */}
       <section className={styles.section}>
         <div className="container" style={{ textAlign: 'center' }}>
