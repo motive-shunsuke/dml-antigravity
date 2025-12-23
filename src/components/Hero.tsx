@@ -31,7 +31,7 @@ export const Hero = () => {
 
         const finishTimer = setTimeout(() => {
             finishOpening();
-        }, 3000);
+        }, 3200);
 
         return () => {
             clearTimeout(moveTimer);
@@ -110,8 +110,8 @@ export const Hero = () => {
                                 top: '40px',
                                 x: '0%',
                                 y: '-50%',
-                                scale: 0.12,
-                                opacity: 1
+                                scale: 0.15,
+                                opacity: 0
                             } : {
                                 opacity: 1,
                                 scale: 1,

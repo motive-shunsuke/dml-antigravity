@@ -23,11 +23,10 @@ export const Header = () => {
         <header className={`${styles.header} ${isOpening ? styles.headerHidden : ''}`}>
             <div className={styles.container}>
                 <Link href="/" className={styles.logo}>
-                    <img
-                        src="/images/blitz-logo.png"
-                        alt="DOKKYO BLITZ"
-                        className={`${styles.logoImg} ${isOpening ? styles.logoLoading : ''}`}
-                    />
+                    <div className={`${styles.logoText} ${isOpening ? styles.logoTextHidden : ''}`}>
+                        <span className={styles.logoD}>DOKKYO</span>
+                        <span className={styles.logoB}>BLITZ</span>
+                    </div>
                 </Link>
 
                 {/* Desktop Nav */}
