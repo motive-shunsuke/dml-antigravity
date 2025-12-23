@@ -41,7 +41,7 @@ export default function Home() {
           <h2 className={styles.sectionTitle}>OUR <span>PHILOSOPHY</span></h2>
           <div className={styles.conceptText}>覇氣</div>
           <div className={styles.conceptMain}>
-            圧倒する、空気を変える、強い主体性を持つ。
+            覇氣
           </div>
           <p className={styles.conceptDescription}>
             私たちは「覇氣」をスローガンに掲げ、フィールド内外で圧倒的な存在感を示します。<br />

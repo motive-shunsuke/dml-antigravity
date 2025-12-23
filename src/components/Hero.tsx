@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './Hero.module.css';
+import { useLoading } from '@/context/LoadingContext';
 
 const backgroundImages = [
     '/images/hero-bg.jpg',
@@ -13,27 +14,36 @@ const backgroundImages = [
 ];
 
 export const Hero = () => {
-    const [openingFinished, setOpeningFinished] = useState(false);
+    const { isOpening, finishOpening, startLogoMove, isLogoMoving } = useLoading();
     const [currentBgIndex, setCurrentBgIndex] = useState(0);
     const [showSlideshow, setShowSlideshow] = useState(false);
 
     useEffect(() => {
-        // Sequence timer - slowed down
-        // 0s: Start
-        // 0.3s: Bolt hits bottom
-        // 0.5s: Logo appears
-        // 3.5s: Finish
-        const timer = setTimeout(() => {
-            setOpeningFinished(true);
-        }, 3800);
-        return () => clearTimeout(timer);
-    }, []);
+        // Animation Timings
+        // 0s: Lightning
+        // 0.8s: Logo reveals
+        // 2.3s: Logo starts moving to header
+        // 3.3s: Animation finishes
 
-    // Start slideshow after 2 seconds
+        const moveTimer = setTimeout(() => {
+            startLogoMove();
+        }, 2000);
+
+        const finishTimer = setTimeout(() => {
+            finishOpening();
+        }, 3000);
+
+        return () => {
+            clearTimeout(moveTimer);
+            clearTimeout(finishTimer);
+        };
+    }, [startLogoMove, finishOpening]);
+
+    // Start slideshow after animation finishes
     useEffect(() => {
         const slideshowTimer = setTimeout(() => {
             setShowSlideshow(true);
-        }, 2000);
+        }, 3000);
         return () => clearTimeout(slideshowTimer);
     }, []);
 
@@ -61,11 +71,11 @@ export const Hero = () => {
                 ))}
             </div>
             <AnimatePresence>
-                {!openingFinished && (
+                {isOpening && (
                     <motion.div
                         className={styles.openingOverlay}
                         exit={{ opacity: 0 }}
-                        transition={{ duration: 1 }}
+                        transition={{ duration: 0.8 }}
                     >
                         <motion.div
                             className={styles.openingBolt}
@@ -94,11 +104,32 @@ export const Hero = () => {
                         </motion.div>
                         <motion.div
                             className={styles.openingLogo}
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 0.5, duration: 0.3, type: 'spring' }}
+                            initial={{ opacity: 0, scale: 0.8, x: '-50%', y: '-50%', left: '50%', top: '50%' }}
+                            animate={isLogoMoving ? {
+                                left: 'max(1rem, calc((100vw - 1200px) / 2 + 1rem))',
+                                top: '40px',
+                                x: '0%',
+                                y: '-50%',
+                                scale: 0.22,
+                                opacity: 1
+                            } : {
+                                opacity: 1,
+                                scale: 1,
+                                left: '50%',
+                                top: '50%',
+                                x: '-50%',
+                                y: '-50%'
+                            }}
+                            transition={isLogoMoving ? {
+                                duration: 1.0,
+                                ease: [0.65, 0, 0.35, 1]
+                            } : {
+                                delay: 0.5,
+                                duration: 0.3,
+                                type: 'spring'
+                            }}
                         >
-                            <img src="/images/blitz-logo.png" alt="DOKKYO BLITZ" style={{ maxWidth: '400px', width: '80vw' }} />
+                            <img src="/images/blitz-logo.png" alt="DOKKYO BLITZ" />
                         </motion.div>
                     </motion.div>
                 )}
@@ -125,8 +156,7 @@ export const Hero = () => {
                     <p className={styles.achievement}>関東一部リーグ所属</p>
                     <p className={styles.message}>
                         <span className={styles.messageLine}>実績も推薦も、高校までの過去なんて関係ない。</span>
-                        <span className={styles.messageLine}>大学から始めて日本代表さえ狙えるこの唯一のスポーツにおいて、</span>
-                        <span className={styles.messageLine}>必要なのは経験ではなく、サークルじゃ燃え尽きない「その熱量」だけ。</span>
+                        <span className={styles.messageLine}>大学から始めて日本代表さえ狙えるこの唯一のスポーツにおいて、必要なのは経験ではなく、サークルじゃ燃え尽きない「その熱量」だけ。</span>
                         <span className={styles.messageLine}>すべてを捨ててゼロになり、本気で日本一を狙わないか。</span>
                     </p>
                 </motion.div>

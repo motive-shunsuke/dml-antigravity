@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import styles from './Header.module.css';
+import { useLoading } from '@/context/LoadingContext';
 
 const NAV_ITEMS = [
     { label: 'Top', href: '/' },
@@ -16,12 +17,17 @@ const NAV_ITEMS = [
 
 export const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const { isOpening } = useLoading();
 
     return (
-        <header className={styles.header}>
+        <header className={`${styles.header} ${isOpening ? styles.headerHidden : ''}`}>
             <div className={styles.container}>
                 <Link href="/" className={styles.logo}>
-                    DOKKYO <span>BLITZ</span>
+                    <img
+                        src="/images/blitz-logo.png"
+                        alt="DOKKYO BLITZ"
+                        className={`${styles.logoImg} ${isOpening ? styles.logoLoading : ''}`}
+                    />
                 </Link>
 
                 {/* Desktop Nav */}

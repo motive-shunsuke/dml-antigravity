@@ -10,12 +10,25 @@
     display: flex;
     align-items: center;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: opacity 0.5s ease, background-color 0.5s ease;
 }
 
+.headerHidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.logoLoading {
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+
+
 .container {
-    max-width: 1200px;
+    max-width: 1440px;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0 2rem;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -23,15 +36,16 @@
 }
 
 .logo {
-    font-family: var(--font-oswald);
-    font-size: 1.5rem;
-    font-weight: bold;
-    letter-spacing: 0.05em;
-    color: #fff;
+    display: flex;
+    align-items: center;
+    height: 100%;
 }
 
-.logo span {
-    color: var(--color-accent);
+.logoImg {
+    height: 48px;
+    width: auto;
+    object-fit: contain;
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .navDesktop {

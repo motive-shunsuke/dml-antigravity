@@ -13,6 +13,8 @@
 
   --font-oswald: var(--font-oswald);
   --font-roboto: var(--font-roboto);
+
+  --container-max-width: 1440px;
 }
 
 * {
@@ -49,9 +51,9 @@ a {
 
 /* Utilities */
 .container {
-  max-width: 1200px;
+  max-width: var(--container-max-width);
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 2rem;
 }
 
 .text-accent {
