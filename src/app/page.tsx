@@ -35,10 +35,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CONCEPT - OUR PHILOSOPHY */}
+      {/* CONCEPT - TEAM SLOGAN */}
       <section className={styles.conceptSection}>
         <div className="container" style={{ maxWidth: '1000px', textAlign: 'center' }}>
-          <h2 className={styles.sectionTitle}>OUR <span>PHILOSOPHY</span></h2>
+          <h2 className={styles.sectionTitle}>TEAM <span>SLOGAN</span></h2>
           <div className={styles.conceptText}>覇氣</div>
           <div className={styles.conceptMain}>
             覇氣
