@@ -4,8 +4,18 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './Hero.module.css';
 
+const backgroundImages = [
+    '/images/hero-bg.jpg',
+    '/images/insta-1.jpg',
+    '/images/insta-2.jpg',
+    '/images/insta-3.jpg',
+    '/images/insta-4.jpg',
+];
+
 export const Hero = () => {
     const [openingFinished, setOpeningFinished] = useState(false);
+    const [currentBgIndex, setCurrentBgIndex] = useState(0);
+    const [showSlideshow, setShowSlideshow] = useState(false);
 
     useEffect(() => {
         // Sequence timer - slowed down
@@ -19,8 +29,37 @@ export const Hero = () => {
         return () => clearTimeout(timer);
     }, []);
 
+    // Start slideshow after 2 seconds
+    useEffect(() => {
+        const slideshowTimer = setTimeout(() => {
+            setShowSlideshow(true);
+        }, 2000);
+        return () => clearTimeout(slideshowTimer);
+    }, []);
+
+    // Background slideshow - change every 4 seconds
+    useEffect(() => {
+        if (!showSlideshow) return;
+
+        const interval = setInterval(() => {
+            setCurrentBgIndex((prev) => (prev + 1) % backgroundImages.length);
+        }, 4000);
+
+        return () => clearInterval(interval);
+    }, [showSlideshow]);
+
     return (
         <section className={styles.hero}>
+            {/* Background Slideshow */}
+            <div className={styles.backgroundSlideshow}>
+                {backgroundImages.map((img, index) => (
+                    <div
+                        key={img}
+                        className={`${styles.backgroundImage} ${index === currentBgIndex && showSlideshow ? styles.active : ''}`}
+                        style={{ backgroundImage: `url(${img})` }}
+                    />
+                ))}
+            </div>
             <AnimatePresence>
                 {!openingFinished && (
                     <motion.div
@@ -77,6 +116,20 @@ export const Hero = () => {
                     <span>DOKKYO MEN'S LACROSSE</span>
                     BLITZ
                 </motion.h1>
+                <motion.div
+                    className={styles.tagline}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5, duration: 0.8 }}
+                >
+                    <p className={styles.achievement}>関東一部リーグ所属</p>
+                    <p className={styles.message}>
+                        実績も推薦も、高校までの過去なんて関係ない。<br />
+                        大学から始めて日本代表さえ狙えるこの唯一のスポーツにおいて、<br />
+                        必要なのは経験ではなく、サークルじゃ燃え尽きない「その熱量」だけ。<br />
+                        すべてを捨ててゼロになり、本気で日本一を狙わないか。
+                    </p>
+                </motion.div>
             </div>
 
             <div className={styles.scrollDown}>SCROLL DOWN</div>

@@ -6,7 +6,44 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url('/images/hero-bg.jpg') no-repeat center/cover;
+    background: #000;
+}
+
+/* Background Slideshow */
+.backgroundSlideshow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.backgroundImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+
+.backgroundImage::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7));
+    z-index: 1;
+}
+
+.backgroundImage.active {
+    opacity: 1;
 }
 
 .overlay {
@@ -107,6 +144,38 @@
     letter-spacing: 0.5em;
     color: var(--color-accent);
     margin-bottom: 1rem;
+}
+
+.tagline {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.achievement {
+    font-family: var(--font-oswald);
+    font-size: 1.5rem;
+    color: var(--color-accent);
+    margin-bottom: 1rem;
+    letter-spacing: 0.1em;
+    text-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.message {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.95);
+    line-height: 1.8;
+    max-width: 900px;
+    margin: 0 auto;
+    font-weight: 400;
+    letter-spacing: 0.02em;
 }
 
 .scrollDown {

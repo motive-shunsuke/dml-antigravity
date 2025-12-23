@@ -13,7 +13,7 @@ export default function Home() {
           <h2 className={styles.sectionTitle}>LATEST <span>TOPICS</span></h2>
           <div className={styles.topicsGrid}>
             {[
-              { date: '2025.12.10', title: '【試合結果】関東学生ラクロスリーグ戦 ブロック3位入賞', tag: 'GAME' },
+              { date: '2025.12.10', title: '【試合結果】関東1部リーグ 5位タイ獲得', tag: 'GAME' },
               { date: '2025.11.25', title: '新チーム始動！2026年度スローガンは「覇氣」', tag: 'NEWS' },
               { date: '2025.11.01', title: '【新入生向け】体験会の日程が決まりました', tag: 'RECRUIT' },
             ].map((topic, i) => (
