@@ -37,12 +37,14 @@
 }
 
 /* Background Slideshow */
+/* Background Slideshow */
 .backgroundSlideshow {
-    position: fixed;
+    position: absolute;
+    /* Changed from fixed to absolute to prevent covering other sections */
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     z-index: 0;
 }
 
@@ -70,11 +72,12 @@
 }
 
 .overlay {
-    position: fixed;
+    position: absolute;
+    /* Changed from fixed to absolute */
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background: rgba(0, 0, 0, 0.6);
     z-index: 2;
 }
@@ -83,12 +86,14 @@
     opacity: 1;
 }
 
-.overlay {
-    position: fixed;
+/* Merged duplicate overlay class and SVG pattern if needed, but keeping separate for now if they stack, just changing position */
+.overlayPattern {
+    /* Renaming second overlay to avoid conflict if both used, but assuming only one needed or they stack. Based on file, I'll just keep the structure but ensure absolute */
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%239C92AC' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
     opacity: 0.3;
 }
@@ -107,15 +112,29 @@
 /* Dynamic Background */
 .hero::before {
     content: '';
-    position: fixed;
+    position: absolute;
+    /* Changed from fixed to absolute */
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background:
         radial-gradient(circle at 50% 50%, rgba(78, 0, 142, 0.4) 0%, transparent 60%),
         linear-gradient(45deg, #000 0%, #1a0b2e 100%);
     z-index: 1;
+}
+
+.contentWrapper {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 10vh;
+    /* Re-added padding to offset vertical centering slightly upwards */
 }
 
 .content {
@@ -144,8 +163,9 @@
 
 .title {
     font-family: var(--font-oswald);
-    font-size: clamp(1.8rem, 4vw, 3rem);
-    line-height: 1.2;
+    font-size: clamp(3rem, 7vw, 7rem);
+    /* Restored to a substantial hero size */
+    line-height: 1.1;
     font-weight: 700;
     color: #fff;
     text-transform: uppercase;
@@ -162,16 +182,16 @@
 
 .title span {
     display: block;
-    font-size: 1rem;
-    letter-spacing: 0.2em;
-    margin-bottom: 0.5rem;
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    letter-spacing: 0.5em;
+    margin-bottom: 1rem;
     font-weight: 400;
 }
 
 /* English Title */
 .englishTitle {
     display: block;
-    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    font-size: clamp(1.5rem, 4vw, 3rem);
     font-family: var(--font-oswald);
     font-weight: 700;
     color: var(--color-accent);
@@ -183,7 +203,7 @@
 /* Dokkyo Men's Lacrosse Text */
 .japaneseTitle {
     display: block;
-    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    font-size: clamp(2.5rem, 6vw, 5rem);
     font-weight: 700;
     letter-spacing: 0.1em;
     color: #fff;
@@ -194,15 +214,13 @@
 
     /* Mobile text adjustments */
     .japaneseTitle {
-        font-size: 2rem;
-        /* Matches menu item size */
+        font-size: clamp(2rem, 10vw, 3.5rem);
         line-height: 1.2;
     }
 
     .englishTitle {
-        font-size: 1rem;
-        /* Smaller accent */
-        letter-spacing: 0.2em;
+        font-size: clamp(1.2rem, 5vw, 2rem);
+        letter-spacing: 0.1em;
     }
 }
 
