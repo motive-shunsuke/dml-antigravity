@@ -1,12 +1,11 @@
 .menuContainer {
     width: 100%;
-    margin-top: auto;
-    background: rgba(0, 0, 0, 0.8);
-    position: absolute;
-    bottom: 0;
-    left: 0;
+    position: relative;
     z-index: 10;
+    margin-top: -15vh;
+    /* Desktop: Pull up to overlap/show at bottom */
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.8);
 }
 
 .menuGrid {
@@ -91,6 +90,8 @@
         border-top: none;
         padding-bottom: 0;
         background: transparent;
+        margin-top: -14vh;
+        /* Mobile: Pull up exactly one row height */
     }
 
     .menuGrid {
