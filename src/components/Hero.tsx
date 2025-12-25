@@ -1,22 +1,13 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './Hero.module.css';
 import { useLoading } from '@/context/LoadingContext';
-
-const backgroundImages = [
-    '/images/hero-bg.jpg',
-    '/images/insta-1.jpg',
-    '/images/insta-2.jpg',
-    '/images/insta-3.jpg',
-    '/images/insta-4.jpg',
-];
+import { HeroMenu } from './HeroMenu';
 
 export const Hero = () => {
     const { isOpening, finishOpening, startLogoMove, isLogoMoving } = useLoading();
-    const [currentBgIndex, setCurrentBgIndex] = useState(0);
-    const [showSlideshow, setShowSlideshow] = useState(false);
 
     useEffect(() => {
         // Animation Timings
@@ -39,37 +30,16 @@ export const Hero = () => {
         };
     }, [startLogoMove, finishOpening]);
 
-    // Start slideshow after animation finishes
-    useEffect(() => {
-        const slideshowTimer = setTimeout(() => {
-            setShowSlideshow(true);
-        }, 3000);
-        return () => clearTimeout(slideshowTimer);
-    }, []);
-
-    // Background slideshow - change every 4 seconds
-    useEffect(() => {
-        if (!showSlideshow) return;
-
-        const interval = setInterval(() => {
-            setCurrentBgIndex((prev) => (prev + 1) % backgroundImages.length);
-        }, 4000);
-
-        return () => clearInterval(interval);
-    }, [showSlideshow]);
-
     return (
         <section className={styles.hero}>
-            {/* Background Slideshow */}
-            <div className={styles.backgroundSlideshow}>
-                {backgroundImages.map((img, index) => (
-                    <div
-                        key={img}
-                        className={`${styles.backgroundImage} ${index === currentBgIndex && showSlideshow ? styles.active : ''}`}
-                        style={{ backgroundImage: `url(${img})` }}
-                    />
-                ))}
-            </div>
+            {/* Background Image */}
+            <div
+                key="hero-bg"
+                className={styles.heroBackground}
+                style={{ backgroundImage: `url(/images/fv-bg.jpg)` }}
+            />
+            <div className={styles.overlay} />
+
             <AnimatePresence>
                 {isOpening && (
                     <motion.div
@@ -135,7 +105,6 @@ export const Hero = () => {
                 )}
             </AnimatePresence>
 
-            <div className={styles.flash} />
 
             <div className={styles.content}>
                 <motion.h1
@@ -144,8 +113,8 @@ export const Hero = () => {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
                 >
-                    <span>DOKKYO MEN'S LACROSSE</span>
-                    BLITZ
+                    <span className={styles.englishTitle}>DOKKYO MEN'S LACROSSE</span>
+                    <span className={styles.japaneseTitle}>獨協男子ラクロス部</span>
                 </motion.h1>
                 <motion.div
                     className={styles.tagline}
@@ -154,15 +123,10 @@ export const Hero = () => {
                     transition={{ delay: 0.5, duration: 0.8 }}
                 >
                     <p className={styles.achievement}>関東一部リーグ所属</p>
-                    <p className={styles.message}>
-                        <span className={styles.messageLine}>実績も推薦も、高校までの過去なんて関係ない。</span>
-                        <span className={styles.messageLine}>大学から始めて日本代表さえ狙えるこの唯一のスポーツにおいて、必要なのは経験ではなく、サークルじゃ燃え尽きない「その熱量」だけ。</span>
-                        <span className={styles.messageLine}>全てを捨てて0になり、本気で日本一を狙わないか。</span>
-                    </p>
                 </motion.div>
             </div>
 
-            <div className={styles.scrollDown}>SCROLL DOWN</div>
+            <HeroMenu />
         </section>
     );
 };
