@@ -55,7 +55,7 @@ export default function AboutPage() {
                                 <img src="/images/kishi.jpg" alt="岸 ヘッドコーチ" className={styles.messageImage} />
                                 <div className={styles.messageText}>
                                     <div className={styles.messageRole}>HEAD COACH</div>
-                                    <h3 className={styles.messageName}>岸 啓之</h3>
+                                    <h3 className={styles.messageName}>岸 陽介</h3>
                                 </div>
                             </div>
                             <div className={styles.messageBody}>
@@ -74,7 +74,7 @@ export default function AboutPage() {
                                 <img src="/images/相馬さん.jpg" alt="相馬 コーチ" className={styles.messageImage} />
                                 <div className={styles.messageText}>
                                     <div className={styles.messageRole}>COACH</div>
-                                    <h3 className={styles.messageName}>相馬 啓太</h3>
+                                    <h3 className={styles.messageName}>相馬 一輝</h3>
                                 </div>
                             </div>
                             <div className={styles.messageBody}>
